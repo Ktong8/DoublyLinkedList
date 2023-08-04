@@ -42,7 +42,11 @@ namespace linked_list {
             ListNode() = default;
             ListNode(T val) : value{val}, prev{nullptr}, next{nullptr} {}
             ListNode(T val, ListNode* prev) : value{val}, prev{prev}, next{nullptr} {}
-            ListNode(T val, std::unique_ptr<ListNode> next) : value{val}, prev{nullptr}, next{std::move(next)} {}
+            ListNode(T val, std::unique_ptr<ListNode> next)
+                : value{val}
+                , prev{nullptr}
+                , next{std::move(next)} {
+            }
         };
         std::unique_ptr<ListNode> head_;
         ListNode* tail_;
