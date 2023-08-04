@@ -101,6 +101,61 @@ namespace linked_list {
         }
         return tail_->prev->val;
     }
+
+    template <typename T>
+    unsigned int DoublyLinkedList<T>::size() const {
+        return size_;
+    }
+
+    template <typename T>
+    bool DoublyLinkedList<T>::empty() const {
+        return !size_;
+    }
+
+    template <typename T>
+    void DoublyLinkedList<T>::swap(DoublyLinkedList& other) noexcept {
+        std::swap(size_, other.size_);
+        std::swap(head_, other.head_);
+        std::swap(tail_, other.tail_);
+    }
+
+    template <typename T>
+    typename DoublyLinkedList<T>::DoublyLinkedListIterator& DoublyLinkedList<T>::DoublyLinkedListIterator::operator++() {
+        node = node->next.get();
+        return *this;
+    }
+
+    template <typename T>
+    typename DoublyLinkedList<T>::DoublyLinkedListIterator& DoublyLinkedList<T>::DoublyLinkedListIterator::operator--() {
+        node = node->prev;
+        return *this;
+    }
+
+    template <typename T>
+    typename DoublyLinkedList<T>::DoublyLinkedListIterator DoublyLinkedList<T>::DoublyLinkedListIterator::operator++(int) {
+        DoublyLinkedListIterator tmp = *this;
+        node = node->next.get();
+        return tmp;
+    }
+
+    template <typename T>
+    typename DoublyLinkedList<T>::DoublyLinkedListIterator DoublyLinkedList<T>::DoublyLinkedListIterator::operator--(int) {
+        DoublyLinkedListIterator tmp = *this;
+        node = node->prev;
+        return tmp;
+    }
+    
+    template <typename T>
+    typename DoublyLinkedList<T>::DoublyLinkedListIterator DoublyLinkedList<T>::begin() const {
+        DoublyLinkedListIterator tmp{head_.get()};
+        return tmp;
+    }
+
+    template <typename T>
+    typename DoublyLinkedList<T>::DoublyLinkedListIterator DoublyLinkedList<T>::end() const {
+        DoublyLinkedListIterator tmp{tail_};
+        return tmp;
+    }
 }
 
 
