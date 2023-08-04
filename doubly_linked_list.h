@@ -75,8 +75,8 @@ namespace linked_list {
 
             DoublyLinkedListIterator& operator++();
             DoublyLinkedListIterator& operator--();
-            DoublyLinkedListIterator& operator++(int);
-            DoublyLinkedListIterator& operator--(int);
+            DoublyLinkedListIterator operator++(int);
+            DoublyLinkedListIterator operator--(int);
 
             bool operator==(const DoublyLinkedListIterator& other) const {
                 return node == other.node;
