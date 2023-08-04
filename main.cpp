@@ -6,4 +6,5 @@ int main() {
     TestPushBack();
     TestPushFront();
     TestPushAndPop();
+    TestInitializers();
 }

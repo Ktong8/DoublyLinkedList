@@ -53,3 +53,26 @@ void TestPushAndPop() {
     }
     assert (sz = 7);
 }
+
+void TestInitializers() {
+    linked_list::DoublyLinkedList<int> ls{1,2,3,4,5};
+    int i = 1;
+    for (int j : ls) {
+        assert(j == i++);
+    }
+    auto ls2 = ls;
+    i = 1;
+    for (int j : ls2) {
+        assert (j == i++);
+    }
+    auto ls3 = std::move(ls2);
+    i = 1;
+    for (int j : ls3) {
+        assert (j == i++);
+    }
+    int len = 0;
+    for (int j : ls2) {
+        len++;
+    }
+    assert (len == 0);
+}
