@@ -104,7 +104,7 @@ namespace linked_list {
     }
 
     template<typename T>
-    DoublyLinkedList<T>::DoublyLinkedList(const DoublyLinkedList<T>& other) : size_(0) {
+    DoublyLinkedList<T>::DoublyLinkedList(const DoublyLinkedList<T>& other) : DoublyLinkedList<T>{} {
         for (T val : other) {
             push_back(val);
         }
@@ -112,13 +112,12 @@ namespace linked_list {
 
     template<typename T>
     DoublyLinkedList<T>::DoublyLinkedList(DoublyLinkedList<T>&& other) noexcept
-        : size_(other.size_)
-        , head_(std::move(other.head))
-        , tail_(other.tail_) {
+        : DoublyLinkedList{} {
+        swap(other);
     }
 
     template <typename T>
-    DoublyLinkedList<T>::DoublyLinkedList(std::initializer_list<T> il) : size_(il.size()) {
+    DoublyLinkedList<T>::DoublyLinkedList(std::initializer_list<T> il) : DoublyLinkedList<T>{} {
         for (T val : il) {
             push_back(val);
         }
