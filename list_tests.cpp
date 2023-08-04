@@ -76,3 +76,17 @@ void TestInitializers() {
     }
     assert (len == 0);
 }
+
+void TestBeginAndEnd() {
+    linked_list::DoublyLinkedList<int> ls{1,2,3,4,5};
+    int i = 1;
+    for (auto it = ls.begin(); it != ls.end(); ++it) {
+        assert (*it == i++);
+    }
+    assert (i == 6);
+    i = 1;
+    for (auto it = ls.begin(); it != ls.end(); it++) {
+        assert (*it == i++);
+    }
+    assert (i == 6);
+}

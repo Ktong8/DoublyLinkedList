@@ -7,4 +7,5 @@ int main() {
     TestPushFront();
     TestPushAndPop();
     TestInitializers();
+    TestBeginAndEnd();
 }
