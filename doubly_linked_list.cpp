@@ -1,4 +1,5 @@
 #include "doubly_linked_list.h"
+#include <stdexcept>
 
 namespace linked_list {
     template<typename T>
@@ -67,6 +68,38 @@ namespace linked_list {
         tail_->prev->next = std::make_unique<ListNode>(elem, tail_->prev, tail_);
         tail_->prev = tail_->prev->next.get();
         size_++;
+    }
+    
+    template <typename T>
+    T DoublyLinkedList<T>::front() const {
+        if (!size_) {
+            throw std::out_of_range("Cannot get front of empty linked list");
+        }
+        return head_->val;
+    }
+
+    template <typename T>
+    T& DoublyLinkedList<T>::front() {
+        if (!size_) {
+            throw std::out_of_range("Cannot get front of empty linked list");
+        }
+        return head_->val;
+    }
+
+    template <typename T>
+    T DoublyLinkedList<T>::back() const {
+        if (!size_) {
+            throw std::out_of_range("Cannot get back of empty linked list");
+        }
+        return tail_->prev->val;
+    }
+
+    template <typename T>
+    T& DoublyLinkedList<T>::back() {
+        if (!size_) {
+            throw std::out_of_range("Cannot get back of empty linked list");
+        }
+        return tail_->prev->val;
     }
 }
 
