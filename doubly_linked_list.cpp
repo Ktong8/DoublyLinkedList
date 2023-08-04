@@ -2,7 +2,11 @@
 
 namespace linked_list {
     template<typename T>
-    DoublyLinkedList<T>::DoublyLinkedList() : size_(0), head_(nullptr), tail_(nullptr) {}
+    DoublyLinkedList<T>::DoublyLinkedList()
+        : size_{0}
+        , head_{std::make_unique<ListNode>()}
+        , tail_{head_.get()} {
+    }
 
     template<typename T>
     DoublyLinkedList<T>::DoublyLinkedList(const DoublyLinkedList<T>& other) : size_(0) {
@@ -12,7 +16,11 @@ namespace linked_list {
     }
 
     template<typename T>
-    DoublyLinkedList<T>::DoublyLinkedList(DoublyLinkedList<T>&& other) noexcept : size_(other.size_), head_(std::move(other.head)), tail_(other.tail_) {}
+    DoublyLinkedList<T>::DoublyLinkedList(DoublyLinkedList<T>&& other) noexcept
+        : size_(other.size_)
+        , head_(std::move(other.head))
+        , tail_(other.tail_) {
+    }
 
     template <typename T>
     DoublyLinkedList<T>::DoublyLinkedList(std::initializer_list<T> il) : size_(il.size()) {
@@ -39,7 +47,27 @@ namespace linked_list {
         tail_ = other.tail_;
     }
 
+    template <typename T>
+    void DoublyLinkedList<T>::push_front(T elem) {
+        head_ = std::make_unique<ListNode>(elem, nullptr, head_.release());
+        if (!size_++) {
+            tail_->prev = head_.get();
+        } else {
+            head_->next->prev = head_.get();
+        }
+    }
 
+    template <typename T>
+    void DoublyLinkedList<T>::push_back(T elem) {
+        if (!size_) {
+            push_front(elem);
+            return;
+        }
+        tail_->prev->next.release();
+        tail_->prev->next = std::make_unique<ListNode>(elem, tail_->prev, tail_);
+        tail_->prev = tail_->prev->next.get();
+        size_++;
+    }
 }
 
 
