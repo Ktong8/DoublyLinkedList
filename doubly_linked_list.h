@@ -42,6 +42,11 @@ namespace linked_list {
             ListNode() = default;
             ListNode(T val) : value{val}, prev{nullptr}, next{nullptr} {}
             ListNode(T val, ListNode* prev) : value{val}, prev{prev}, next{nullptr} {}
+            ListNode(T val, ListNode* prev, ListNode* next)
+                : value{val}
+                , prev{prev}
+                , next{next} {
+            }
             ListNode(T val, std::unique_ptr<ListNode> next)
                 : value{val}
                 , prev{nullptr}
