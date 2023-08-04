@@ -17,9 +17,11 @@ namespace linked_list {
         DoublyLinkedList& operator=(const DoublyLinkedList& other);
         DoublyLinkedList& operator=(DoublyLinkedList&& other);
 
-        // setters
+        // modifiers
         void push_front(T elem);
         void push_back(T elem);
+        void pop_front();
+        void pop_back();
 
         // getters
         T front() const;
@@ -160,6 +162,25 @@ namespace linked_list {
         tail_->prev->next = std::make_unique<ListNode>(elem, tail_->prev, tail_);
         tail_->prev = tail_->prev->next.get();
         size_++;
+    }
+
+    template <typename T>
+    void DoublyLinkedList<T>::pop_front() {
+        head_ = std::move(head_->next);
+        head_->prev = nullptr;
+        size_--;
+    }
+
+    template <typename T>
+    void DoublyLinkedList<T>::pop_back() {
+        if (size_ == 1) {
+            pop_front();
+            return;
+        }
+        ListNode* new_end = tail_->prev->prev;
+        new_end->next = std::move(tail_->prev->next);
+        tail_->prev = new_end;
+        size_--;
     }
 
     template <typename T>
