@@ -85,8 +85,12 @@ void TestBeginAndEnd() {
     }
     assert (i == 6);
     i = 1;
-    for (auto it = ls.begin(); it != ls.end(); it++) {
+    auto it = ls.begin();
+    for (; it != ls.end(); it++) {
         assert (*it == i++);
     }
     assert (i == 6);
+    it--;
+    --it;
+    assert (*it == 4);
 }
