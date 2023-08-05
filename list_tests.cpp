@@ -94,3 +94,26 @@ void TestBeginAndEnd() {
     --it;
     assert (*it == 4);
 }
+
+void TestSizeAndEmpty() {
+    linked_list::DoublyLinkedList<int> ls{1,2,3};
+    assert (ls.size() == 3);
+    assert (!ls.empty());
+    linked_list::DoublyLinkedList<int> ls2;
+    assert (ls2.size() == 0);
+    assert (ls2.empty());
+    ls2.push_front(7123);
+    assert (ls2.size() == 1);
+    assert (!ls2.empty());
+    ls2.pop_back();
+    assert (ls2.size() == 0);
+    assert (ls2.empty());
+    ls2.push_back(161236);
+    assert (ls2.size() == 1);
+    for (int i = 0; i < 5; ++i) {
+        ls2.push_back(i);
+    }
+    assert (ls2.size() == 6);
+    ls.pop_back();
+    assert (ls.size() == 2);
+}
