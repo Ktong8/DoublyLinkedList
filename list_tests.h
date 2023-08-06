@@ -7,5 +7,3 @@ void TestPushAndPop();
 void TestInitializers();
 void TestBeginAndEnd();
 void TestSizeAndEmpty();
-void TestMove();
-void TestCopy();
